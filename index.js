@@ -1,5 +1,14 @@
 'use strict';
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
 
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 // Imports dependencies and set up http server
 const
   express = require('express'),
@@ -36,7 +45,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "<Maria_Chmut_Token>"
+    let VERIFY_TOKEN = "Maria_Chmut_Token"
       
     // Parse the query params
     let mode = req.query['hub.mode'];
